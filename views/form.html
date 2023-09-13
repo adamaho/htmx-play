@@ -1,0 +1,15 @@
+{{ block "form" .}}
+    <form id="add-todo" hx-post="/todos" htmx:afterRequest hx-target="#todos" hx-swap="outerHTML">
+        <label for="todo">
+            Todo
+        </label>
+        <input type="text" id="todo" label="todo" name="todo" />
+        <button form="add-todo" >Add Todo</button>
+    </form>
+    <script>
+        const form = document.getElementById("add-todo");
+        form.addEventListener("htmx:afterRequest", () => {
+            form.reset()
+        })
+    </script>
+{{end}}

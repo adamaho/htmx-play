@@ -1,0 +1,24 @@
+{{ block "items" .}}
+    <ul id="todos">
+        {{ range . }}
+            {{ template "item" .}}
+        {{ end }}
+    </ul>
+{{ end }}
+
+{{ block "item" .}}
+
+{{ $value := "" }}
+{{ if .Checked }}
+{{ $value = "checked" }}
+{{ else }}
+{{ $value = "" }}
+{{ end -}}
+
+<li id="todo-item-{{ .Id }}">
+    <span>
+        {{ .Text }}
+    </span>
+    <input type="checkbox" {{ $value }} hx-post="/todos/{{ .Id }}/toggle" hx-trigger="click" hx-target="#todo-item-{{ .Id }}" hx-swap="outerHTML" />
+</li>
+{{ end }}
