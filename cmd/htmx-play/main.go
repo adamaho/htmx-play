@@ -55,7 +55,7 @@ func main() {
 			return c.String(http.StatusBadRequest, "failed to parse id as integer")
 		}
 
-		if id > len(items) {
+		if id > len(items) || id < 0 {
 			return c.String(http.StatusNotFound, "item not found")
 		}
 
